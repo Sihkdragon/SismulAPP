@@ -2,6 +2,7 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Home from "./Pages/home";
+import Alldata from "./Pages/alldata";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -14,7 +15,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Home />
+        {/* <Home /> */}
+        <Alldata />
       </View>
       <StatusBar style="dark" />
     </View>

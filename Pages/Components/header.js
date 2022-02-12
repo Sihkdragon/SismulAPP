@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-export const Header = () => {
+export const Header = ({ title }) => {
   return (
     <View style={styles.header}>
       <MaterialIcons
@@ -9,7 +9,7 @@ export const Header = () => {
         size={26}
         color={"#22A6B3"}
       />
-      <Text style={styles.Title}>Student Attendance</Text>
+      <Text style={styles.Title}>{title}</Text>
       <MaterialIcons
         name="account-circle"
         style={styles.account}

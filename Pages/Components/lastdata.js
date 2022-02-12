@@ -58,7 +58,7 @@ const Lastdata = () => {
 
 const styles = StyleSheet.create({
   lastContainer: {
-    marginTop: 8,
+    marginVertical: 8,
     width: "100%",
     height: "20%",
     borderWidth: 4,
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   tableheadercontainer: {
     marginVertical: 8,
     marginHorizontal: 16,
-    backgroundColor: "pink",
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -76,7 +75,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#22A6B3",
   },
-  container: {},
+  container: {
+    flex: 1,
+  },
   item: {
     marginVertical: 8,
     marginHorizontal: 16,
@@ -86,12 +87,12 @@ const styles = StyleSheet.create({
   },
   datacontainer1: {
     borderBottomColor: "#3E3E3E",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     width: "35%",
   },
   datacontainer2: {
     borderBottomColor: "#3E3E3E",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     width: "50%",
   },
   data: {

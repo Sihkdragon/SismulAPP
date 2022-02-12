@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <View style={styles.camera}></View>
       <Text style={styles.barusajatext}>Baru saja diabsen :</Text>
       <Lastdata />
+      <Navigation />
     </View>
   );
 };
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     height: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 64,
+    marginTop: 38,
   },
   timetext: {
     fontSize: 16,
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   camera: {
     marginTop: 24,
     width: "100%",
-    height: "35%",
+    height: "30%",
     borderWidth: 2,
     borderColor: "#22A6B3",
   },
