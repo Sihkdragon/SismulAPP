@@ -43,7 +43,8 @@ const Item = ({ nisn, nama, latestabsen }) => (
   </View>
 );
 
-const Alldata = () => {
+const Alldata = ({ route, navigation }) => {
+  console.log(route);
   const renderItem = ({ item }) => (
     <Item nisn={item.nisn} nama={item.nama} latestabsen={item.latestabsen} />
   );

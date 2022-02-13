@@ -4,10 +4,10 @@ import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
 const Home = ({ route, navigation }) => {
-  const title = route.params;
+  console.log(route.params);
   return (
     <View style={styles.homecontainer}>
-      <Header title={title} />
+      <Header title={"Home"} />
       <View style={styles.time}>
         <Text style={styles.timetext}>Rabu</Text>
         <Text style={styles.timetext}>02/02/2022</Text>
