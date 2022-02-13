@@ -12,20 +12,13 @@ import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const DATA = [
-  // {
-  //   nisn: "1011818181",
-  //   nama: "Ditotisi Rasyid Sumpena",
-  //   latestabsen: "22/02/2022",
-  // },
   {
     nisn: "1011818112",
     nama: "Ida Yani Agustria",
-    latestabsen: "22/02/2022",
   },
   {
     nisn: "10118141481",
     nama: "Aprilia Siti Shopia",
-    latestabsen: "22/02/2022",
   },
 ];
 
@@ -37,19 +30,16 @@ const Item = ({ nisn, nama, latestabsen }) => (
     <View style={styles.tableContent2}>
       <Text style={styles.tableContentName}>{nama}</Text>
     </View>
-    <View style={styles.tableContent}>
-      <Text style={styles.tableContentName}>{latestabsen}</Text>
-    </View>
   </View>
 );
 
-const Alldata = () => {
+const TodayData = () => {
   const renderItem = ({ item }) => (
     <Item nisn={item.nisn} nama={item.nama} latestabsen={item.latestabsen} />
   );
   return (
     <View style={styles.allContainer}>
-      <Header title={"Student Data"} />
+      <Header title={"Today Attendance"} />
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Cari Data..."
@@ -72,9 +62,6 @@ const Alldata = () => {
           </View>
           <View style={styles.tableHeader2}>
             <Text style={styles.tableHeaderName}>Nama</Text>
-          </View>
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderName}>Terakhir Absen</Text>
           </View>
         </View>
         <SafeAreaView style={styles.tablecontent}>
@@ -117,44 +104,44 @@ const styles = StyleSheet.create({
   },
   tableHeaderContainer: {
     flexDirection: "row",
+    paddingHorizontal: 8,
     height: 40,
   },
   tableHeader: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#16717A",
     justifyContent: "center",
     flex: 1,
   },
   tableHeader2: {
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
-    borderColor: "#16717A",
+    marginLeft: 8,
     justifyContent: "center",
-    flex: 1.1,
+    flex: 1.5,
   },
   tableHeaderName: {
     color: "#22A6B3",
-    textAlign: "center",
+    flexDirection: "row",
+    alignItems: "center",
     fontSize: 12,
   },
   tableContentContainer: {
     flexDirection: "row",
+    paddingHorizontal: 8,
     height: 40,
   },
   tableContent: {
+    marginRight: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#16717A",
-    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
     flex: 1,
   },
   tableContent2: {
+    marginLeft: 8,
     borderBottomWidth: 1,
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
     borderColor: "#16717A",
-    justifyContent: "center",
-    flex: 1.1,
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1.75,
   },
   tableContentName: {
     color: "#22A6B3",
@@ -166,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Alldata;
+export default TodayData;

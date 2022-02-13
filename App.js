@@ -3,7 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Home from "./Pages/home";
 import Alldata from "./Pages/alldata";
-
+import Todaydata from "./Pages/todaydata";
+// import Navigator from "./Routes/mainStack";
 export default function App() {
   const [loaded] = useFonts({
     notosans: require("./assets/fonts/NotoSans-Regular.ttf"),
@@ -15,10 +16,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        {/* <Home /> */}
-        <Alldata />
+        {/* <Navigator /> */}
+        <Home />
+        {/* <Alldata /> */}
+        {/* <Todaydata /> */}
       </View>
-      <StatusBar style="dark" />
     </View>
   );
 }
