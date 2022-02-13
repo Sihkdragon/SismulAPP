@@ -1,20 +1,29 @@
-import { View, StyleSheet, Text, Image } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableNativeFeedback,
+} from "react-native";
+import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import qrcode from "../../image/qrcode.png";
-const Navigation = () => {
+const touchHandeler = (componentname) => {
+  navigation.navigate(componentname);
+};
+const Navigation = ({ touchHandeler }) => {
   return (
     <View style={styles.navigationContainer}>
-      <View style={styles.buttonNavigation}>
-        <FontAwesome5
-          name="list-alt"
-          style={styles.menuIcon}
-          size={36}
-          color={"#22A6B3"}
-        />
-        <Text style={styles.menuText}>Absen Hari ini</Text>
-      </View>
+      <TouchableNativeFeedback onPress={touchHandeler}>
+        <View style={styles.buttonNavigation}>
+          <FontAwesome5
+            name="list-alt"
+            style={styles.menuIcon}
+            size={36}
+            color={"#22A6B3"}
+          />
+          <Text style={styles.menuText}>Absen Hari ini</Text>
+        </View>
+      </TouchableNativeFeedback>
       <View style={styles.buttonNavigationHomeCon}>
         <View style={styles.buttonNavigationHome}>
           <Image source={qrcode} style={styles.qrLogo} />

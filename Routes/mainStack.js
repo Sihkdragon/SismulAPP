@@ -1,21 +1,21 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import { createAppContainer } from "react-navigation";
 import Home from "../Pages/home";
 import Alldata from "../Pages/alldata";
 import TodayData from "../Pages/todaydata";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const screens = {
-  Home: {
-    screen: Home,
-  },
-  TodayData: {
-    screen: TodayData,
-  },
-  Alldata: {
-    screen: Alldata,
-  },
+const Stack = createNativeStackNavigator();
+const MainStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+        initialParams={{ title: "Home" }}
+      />
+      <Stack.Screen name="Alldata" component={Alldata} />
+      <Stack.Screen name="TodayData" component={TodayData} />
+    </Stack.Navigator>
+  );
 };
-
-const MainStack = createStackNavigator(screens);
-
-export default createAppContainer(MainStack);
+export default MainStack;

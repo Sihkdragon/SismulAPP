@@ -3,10 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
-const Home = () => {
+const Home = ({ route, navigation }) => {
+  const title = route.params;
   return (
     <View style={styles.homecontainer}>
-      <Header />
+      <Header title={title} />
       <View style={styles.time}>
         <Text style={styles.timetext}>Rabu</Text>
         <Text style={styles.timetext}>02/02/2022</Text>
