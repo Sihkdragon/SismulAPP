@@ -21,7 +21,7 @@ export const Header = ({ title }) => {
 };
 const styles = StyleSheet.create({
   header: {
-    marginTop: 42,
+    marginTop: 72,
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",

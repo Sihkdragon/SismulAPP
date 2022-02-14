@@ -1,9 +1,39 @@
-import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
+import { BarCodeScanner } from "expo-barcode-scanner";
 const Home = () => {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [nik, setNIK] = useState("Belum Ter-Scan");
+
+  const askForCameraPermission = () => {
+    async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status == "granted");
+    };
+  };
+
+  // Requst Izin Kamera
+  useEffect(() => {
+    askForCameraPermission();
+  }, []);
+  // Scan NIK doing
+  const handleBarCodeScanner = ({ type, data }) => {
+    setScanned(true);
+    setNIK(data);
+    consol;
+  };
+  //Check izin
+  let statusteks = "";
+  if (hasPermission === null) {
+    statusteks = "meminta perizinan kamera";
+  }
+  if (hasPermission === false) {
+    statusteks = "tidak diberi akses kamera";
+  }
   return (
     <View style={styles.homecontainer}>
       <Header title={"Home"} />
@@ -11,7 +41,13 @@ const Home = () => {
         <Text style={styles.timetext}>Rabu</Text>
         <Text style={styles.timetext}>02/02/2022</Text>
       </View>
-      <View style={styles.camera}></View>
+      <View style={styles.camera}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanner}
+          style={{ height: 200, width: 200 }}
+        />
+      </View>
+      <Text>{statusteks}</Text>
       <Text style={styles.barusajatext}>Baru saja diabsen :</Text>
       <Lastdata />
       <Navigation />
@@ -42,6 +78,7 @@ const styles = StyleSheet.create({
     height: "30%",
     borderWidth: 2,
     borderColor: "#22A6B3",
+    overflow: "hidden",
   },
   barusajatext: {
     marginTop: 8,
