@@ -7,13 +7,17 @@ import {
 } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import qrcode from "../../image/qrcode.png";
-const touchHandeler = (componentname) => {
-  navigation.navigate(componentname);
-};
-const Navigation = ({ touchHandeler }) => {
+import { useNavigation } from "@react-navigation/native";
+
+const Navigation = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.navigationContainer}>
-      <TouchableNativeFeedback onPress={touchHandeler}>
+      <TouchableNativeFeedback
+        onPress={() => {
+          navigation.navigate("TodayData");
+        }}
+      >
         <View style={styles.buttonNavigation}>
           <FontAwesome5
             name="list-alt"
@@ -24,20 +28,32 @@ const Navigation = ({ touchHandeler }) => {
           <Text style={styles.menuText}>Absen Hari ini</Text>
         </View>
       </TouchableNativeFeedback>
-      <View style={styles.buttonNavigationHomeCon}>
-        <View style={styles.buttonNavigationHome}>
-          <Image source={qrcode} style={styles.qrLogo} />
+      <TouchableNativeFeedback
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      >
+        <View style={styles.buttonNavigationHomeCon}>
+          <View style={styles.buttonNavigationHome}>
+            <Image source={qrcode} style={styles.qrLogo} />
+          </View>
         </View>
-      </View>
-      <View style={styles.buttonNavigation}>
-        <MaterialCommunityIcons
-          name="format-list-text"
-          style={styles.menuIcon}
-          size={36}
-          color={"#22A6B3"}
-        />
-        <Text style={styles.menuText1}>Seluruh Data Siswa</Text>
-      </View>
+      </TouchableNativeFeedback>
+      <TouchableNativeFeedback
+        onPress={() => {
+          navigation.navigate("Alldata");
+        }}
+      >
+        <View style={styles.buttonNavigation}>
+          <MaterialCommunityIcons
+            name="format-list-text"
+            style={styles.menuIcon}
+            size={36}
+            color={"#22A6B3"}
+          />
+          <Text style={styles.menuText1}>Seluruh Data Siswa</Text>
+        </View>
+      </TouchableNativeFeedback>
     </View>
   );
 };

@@ -2,6 +2,7 @@ import Home from "../Pages/home";
 import Alldata from "../Pages/alldata";
 import TodayData from "../Pages/todaydata";
 import Login from "../Pages/login";
+import Splash from "../Pages/splash";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -9,6 +10,11 @@ const title = "Studen Data";
 const MainStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Splash"
+        component={Splash}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Login"
         component={Login}
@@ -23,9 +29,13 @@ const MainStack = () => {
       <Stack.Screen
         name="Alldata"
         component={Alldata}
-        initialParams={{ itemId: 42 }}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="TodayData" component={TodayData} />
+      <Stack.Screen
+        name="TodayData"
+        component={TodayData}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

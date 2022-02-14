@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
-const Home = ({ route, navigation }) => {
-  console.log(route.params);
+const Home = () => {
   return (
     <View style={styles.homecontainer}>
       <Header title={"Home"} />
@@ -34,7 +33,6 @@ const styles = StyleSheet.create({
   },
   timetext: {
     fontSize: 16,
-    fontFamily: "noto-sans",
     color: "#22A6B3",
     letterSpacing: 1,
   },
@@ -48,7 +46,6 @@ const styles = StyleSheet.create({
   barusajatext: {
     marginTop: 8,
     fontSize: 16,
-    fontFamily: "noto-sans",
     color: "#22A6B3",
     letterSpacing: 1,
   },

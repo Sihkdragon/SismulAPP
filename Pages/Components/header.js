@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   Title: {
     color: "#22A6B3",
     fontSize: 18,
-    fontFamily: "notosans",
     letterSpacing: 1,
   },
   account: {

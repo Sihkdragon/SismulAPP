@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Image, Text, TextInput, Button } from "react-native";
 import Logo from "../image/logo.png";
-
+import { useNavigation } from "@react-navigation/native";
 const Login = () => {
+  const navigation = useNavigation();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const loginHandler = () => {
+    if (username === "admin" && password === "admin") {
+      navigation.push("Home");
+    }
+  };
   return (
     <View style={styles.Login}>
       <Image source={Logo} style={styles.logo} />
@@ -10,10 +18,10 @@ const Login = () => {
         Tarbiyatul Mubtadiin Student Attendance
       </Text>
       <Text style={styles.inputText}>Username</Text>
-      <TextInput style={styles.input} />
+      <TextInput style={styles.input} onChangeText={setUsername} />
       <Text style={styles.inputText}>Password</Text>
-      <TextInput style={styles.input} />
-      <Button title={"masuk"} color="#22A6B3" />
+      <TextInput style={styles.input} onChangeText={setPassword} />
+      <Button title={"masuk"} color="#22A6B3" onPress={loginHandler} />
       <Text style={styles.TextContainer}>
         <Text style={styles.TextLink}>Belum punya akun?</Text> {"\n"}Hubungi
         Bagian Tata usaha{"\n"}
