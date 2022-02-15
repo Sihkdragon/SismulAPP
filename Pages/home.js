@@ -5,42 +5,54 @@ import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-const baseUrl = "http://192.168.41.39:8000/absen";
+const URL = "http://192.168.41.39:8000/api/absenpost";
 const Home = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [nik, setNIK] = useState(null);
+  const [DATA, SETDATA] = useState([]);
+  // GetData Terakhir Absen
+  const getData = async () => {
+    try {
+      const res = await axios.get("http://192.168.41.39:8000/homedata");
+      SETDATA(res.data);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
+  // Proses Kamera
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   };
-  const setAbsen = () => {
-    console.log("telah di scan");
+  const setAbsen = async (NIK) => {
+    try {
+      await fetch(URL, {
+        method: "post",
+        mode: "no-cors",
+        headers: {
+          nik: NIK,
+        },
+      });
+      // setStatus("Berhasil Dikirim");
+      alert("Siswa dengan NIS " + NIK + " Berhasil diabsen");
+    } catch (error) {
+      console.log(error);
+    }
   };
   // Requst Izin Kamera
   useEffect(() => {
+    getData();
     askForCameraPermission();
-    !nik === null && setAbsen();
-  }, [nik]);
+  }, []);
   // Scan NIK doing
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setNIK(data);
-    // async () => {
-    //   try {
-    //     const res = await axios.get(baseUrl, {
-    //       headers: {
-    //         nik: nik,
-    //       },
-    //     });
-    //     alert("Scan Berhasil");
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-    // };
+    setAbsen(data);
     console.log("Type: " + type + "\nData: " + data);
   };
   //Check izin
@@ -64,17 +76,19 @@ const Home = () => {
           style={{ height: 650, width: 365 }}
         />
       </View>
-      <Text>{nik}</Text>
       <Text style={styles.barusajatext}>Baru saja diabsen :</Text>
-      <Lastdata />
-      {scanned && (
+      <Lastdata DATA={DATA} />
+      {
+        scanned && (
           <Button
             title={"Scan lagi?"}
             color={"#22A6B3"}
             onPress={() => setScanned(false)}
           />
-        ) &&
-        setNIK("silahkan scan ulang")}
+        )
+        // &&
+        // setNIK("silahkan scan ulang")
+      }
       <Navigation />
     </View>
   );

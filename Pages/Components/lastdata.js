@@ -6,14 +6,13 @@ import {
   Text,
   StatusBar,
 } from "react-native";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 const baseUrl = "http://192.168.41.39:8000/homedata";
 
 const Item = ({ siswa_id, nama }) => (
   <View style={styles.item}>
     <View style={styles.datacontainer1}>
-      <Text style={styles.data}>{siswa_id}</Text>
+      <Text style={styles.datasiswa}>{siswa_id}</Text>
     </View>
     <View style={styles.datacontainer2}>
       <Text style={styles.data}>{nama}</Text>
@@ -21,26 +20,14 @@ const Item = ({ siswa_id, nama }) => (
   </View>
 );
 
-const Lastdata = () => {
-  const [DATA, SETDATA] = useState([]);
-  const getData = async () => {
-    try {
-      const res = await axios.get(baseUrl);
-      SETDATA(res.data);
-    } catch (error) {
-      alert(error);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+const Lastdata = ({ DATA }) => {
   const renderItem = ({ item }) => (
     <Item siswa_id={item.siswa_id} nama={item.nama} />
   );
   return (
     <View style={styles.lastContainer}>
       <View style={styles.tableheadercontainer}>
-        <Text style={styles.tableheader}>NIK</Text>
+        <Text style={styles.tableheader}>NIS</Text>
         <Text style={styles.tableheader}>Nama Lengkap</Text>
       </View>
       <SafeAreaView style={styles.container}>
@@ -86,7 +73,7 @@ const styles = StyleSheet.create({
   datacontainer1: {
     borderBottomColor: "#3E3E3E",
     borderBottomWidth: 1,
-    width: "35%",
+    width: "45%",
   },
   datacontainer2: {
     borderBottomColor: "#3E3E3E",
@@ -94,7 +81,11 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   data: {
-    fontSize: 16,
+    fontSize: 12,
+    color: "#22A6B3",
+  },
+  datasiswa: {
+    fontSize: 12,
     color: "#22A6B3",
   },
 });

@@ -7,9 +7,9 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const loginHandler = () => {
-    if (username === "Admin" && password === "Admin") {
-      navigation.push("Home");
-    }
+    // if (username === "Admin" && password === "Admin") {
+    navigation.push("Home");
+    // }
   };
   return (
     <View style={styles.Login}>
