@@ -7,46 +7,42 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+
+import React, { useEffect, useState } from "react";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
+import axios from "axios";
+const baseUrl = "http://192.168.18.18:8000/alldata";
 
-const DATA = [
-  // {
-  //   nisn: "1011818181",
-  //   nama: "Ditotisi Rasyid Sumpena",
-  //   latestabsen: "22/02/2022",
-  // },
-  {
-    nisn: "1011818112",
-    nama: "Ida Yani Agustria",
-    latestabsen: "22/02/2022",
-  },
-  {
-    nisn: "10118141481",
-    nama: "Aprilia Siti Shopia",
-    latestabsen: "22/02/2022",
-  },
-];
-
-const Item = ({ nisn, nama, latestabsen }) => (
+const Item = ({ nik, nama, latestabsen }) => (
   <View style={styles.tableContentContainer}>
     <View style={styles.tableContent}>
-      <Text style={styles.tableContentName}>{nisn}</Text>
+      <Text style={styles.tableContentName}>{nik}</Text>
     </View>
     <View style={styles.tableContent2}>
       <Text style={styles.tableContentName}>{nama}</Text>
     </View>
-    <View style={styles.tableContent}>
+    <View style={styles.tableContent3}>
       <Text style={styles.tableContentName}>{latestabsen}</Text>
     </View>
   </View>
 );
-
-const Alldata = ({ route, navigation }) => {
-  console.log(route);
+const Alldata = () => {
+  const [DATA, SETDATA] = useState([]);
+  const getData = async () => {
+    try {
+      const res = await axios.get(baseUrl);
+      SETDATA(res.data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   const renderItem = ({ item }) => (
-    <Item nisn={item.nisn} nama={item.nama} latestabsen={item.latestabsen} />
+    <Item nik={item.nik} nama={item.nama} latestabsen={item.last_diabsen} />
   );
   return (
     <View style={styles.allContainer}>
@@ -74,7 +70,7 @@ const Alldata = ({ route, navigation }) => {
           <View style={styles.tableHeader2}>
             <Text style={styles.tableHeaderName}>Nama</Text>
           </View>
-          <View style={styles.tableHeader}>
+          <View style={styles.tableHeader3}>
             <Text style={styles.tableHeaderName}>Terakhir Absen</Text>
           </View>
         </View>
@@ -82,7 +78,7 @@ const Alldata = ({ route, navigation }) => {
           <FlatList
             data={DATA}
             renderItem={renderItem}
-            keyExtractor={(item) => item.nisn}
+            keyExtractor={(item) => item.nik}
           />
         </SafeAreaView>
       </View>
@@ -126,6 +122,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
   },
+  tableHeader3: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#16717A",
+    justifyContent: "center",
+    flex: 0.7,
+  },
   tableHeader2: {
     borderBottomWidth: 1,
     borderRightWidth: 1,
@@ -148,6 +150,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "#16717A",
     justifyContent: "center",
     flex: 1,
+  },
+  tableContent3: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#16717A",
+    justifyContent: "center",
+    flex: 0.7,
   },
   tableContent2: {
     borderBottomWidth: 1,

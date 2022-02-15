@@ -30,14 +30,13 @@ const styles = StyleSheet.create({
     width: 98,
     height: 98,
     alignSelf: "center",
-    marginTop: 98,
     marginBottom: 20,
   },
   bigTitle: {
     textAlign: "center",
     color: "#fff",
     fontWeight: "bold",
-    fontSize: 22,
+    fontSize: 32,
   },
 });
 

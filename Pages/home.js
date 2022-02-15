@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
@@ -10,10 +10,10 @@ const Home = () => {
   const [nik, setNIK] = useState("Belum Ter-Scan");
 
   const askForCameraPermission = () => {
-    async () => {
+    (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status == "granted");
-    };
+      setHasPermission(status === "granted");
+    })();
   };
 
   // Requst Izin Kamera
@@ -21,10 +21,10 @@ const Home = () => {
     askForCameraPermission();
   }, []);
   // Scan NIK doing
-  const handleBarCodeScanner = ({ type, data }) => {
+  const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setNIK(data);
-    consol;
+    console.log("Type: " + type + "\nData: " + data);
   };
   //Check izin
   let statusteks = "";
@@ -43,13 +43,20 @@ const Home = () => {
       </View>
       <View style={styles.camera}>
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanner}
-          style={{ height: 200, width: 200 }}
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ height: 650, width: 365 }}
         />
       </View>
-      <Text>{statusteks}</Text>
+      <Text>{nik}</Text>
       <Text style={styles.barusajatext}>Baru saja diabsen :</Text>
       <Lastdata />
+      {scanned && (
+        <Button
+          title={"Scan lagi?"}
+          color={"#22A6B3"}
+          onPress={() => setScanned(false)}
+        />
+      )}
       <Navigation />
     </View>
   );

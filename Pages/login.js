@@ -7,9 +7,9 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const loginHandler = () => {
-    if (username === "admin" && password === "admin") {
-      navigation.push("Home");
-    }
+    // if (username === "Admin" && password === "Admin") {
+    navigation.push("Home");
+    // }
   };
   return (
     <View style={styles.Login}>
@@ -18,9 +18,17 @@ const Login = () => {
         Tarbiyatul Mubtadiin Student Attendance
       </Text>
       <Text style={styles.inputText}>Username</Text>
-      <TextInput style={styles.input} onChangeText={setUsername} />
+      <TextInput
+        style={styles.input}
+        onChangeText={setUsername}
+        value={username}
+      />
       <Text style={styles.inputText}>Password</Text>
-      <TextInput style={styles.input} onChangeText={setPassword} />
+      <TextInput
+        style={styles.input}
+        onChangeText={setPassword}
+        value={password}
+      />
       <Button title={"masuk"} color="#22A6B3" onPress={loginHandler} />
       <Text style={styles.TextContainer}>
         <Text style={styles.TextLink}>Belum punya akun?</Text> {"\n"}Hubungi

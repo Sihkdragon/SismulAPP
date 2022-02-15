@@ -7,25 +7,17 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+import React, { useEffect, useState } from "react";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
+import axios from "axios";
+const baseUrl = "http://192.168.18.18:8000/todaydata";
 
-const DATA = [
-  {
-    nisn: "1011818112",
-    nama: "Ida Yani Agustria",
-  },
-  {
-    nisn: "10118141481",
-    nama: "Aprilia Siti Shopia",
-  },
-];
-
-const Item = ({ nisn, nama, latestabsen }) => (
+const Item = ({ siswa_id, nama }) => (
   <View style={styles.tableContentContainer}>
     <View style={styles.tableContent}>
-      <Text style={styles.tableContentName}>{nisn}</Text>
+      <Text style={styles.tableContentName}>{siswa_id}</Text>
     </View>
     <View style={styles.tableContent2}>
       <Text style={styles.tableContentName}>{nama}</Text>
@@ -34,8 +26,20 @@ const Item = ({ nisn, nama, latestabsen }) => (
 );
 
 const TodayData = () => {
+  const [DATA, SETDATA] = useState([]);
+  const getData = async () => {
+    try {
+      const res = await axios.get(baseUrl);
+      SETDATA(res.data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   const renderItem = ({ item }) => (
-    <Item nisn={item.nisn} nama={item.nama} latestabsen={item.latestabsen} />
+    <Item siswa_id={item.siswa_id} nama={item.nama} />
   );
   return (
     <View style={styles.allContainer}>
@@ -58,7 +62,7 @@ const TodayData = () => {
       <View style={styles.tableContainer}>
         <View style={styles.tableHeaderContainer}>
           <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderName}>NISN</Text>
+            <Text style={styles.tableHeaderName}>siswa_id</Text>
           </View>
           <View style={styles.tableHeader2}>
             <Text style={styles.tableHeaderName}>Nama</Text>
@@ -68,7 +72,7 @@ const TodayData = () => {
           <FlatList
             data={DATA}
             renderItem={renderItem}
-            keyExtractor={(item) => item.nisn}
+            keyExtractor={(item) => item.siswa_id}
           />
         </SafeAreaView>
       </View>
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
   tableHeader2: {
     marginLeft: 8,
     justifyContent: "center",
-    flex: 1.5,
+    flex: 1.2,
   },
   tableHeaderName: {
     color: "#22A6B3",
@@ -133,7 +137,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#16717A",
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
+    flex: 1.2,
   },
   tableContent2: {
     marginLeft: 8,
