@@ -7,13 +7,12 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
-
 import React, { useEffect, useState } from "react";
 import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
-const baseUrl = "http://192.168.18.18:8000/alldata";
+const baseUrl = "http://192.168.41.39:8000/alldata";
 
 const Item = ({ nik, nama, latestabsen }) => (
   <View style={styles.tableContentContainer}>

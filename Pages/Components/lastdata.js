@@ -6,9 +6,9 @@ import {
   Text,
   StatusBar,
 } from "react-native";
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-const baseUrl = "http://192.168.18.18:8000/homedata";
+const baseUrl = "http://192.168.41.39:8000/homedata";
 
 const Item = ({ siswa_id, nama }) => (
   <View style={styles.item}>

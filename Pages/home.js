@@ -4,10 +4,12 @@ import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import axios from "axios";
+const baseUrl = "http://192.168.41.39:8000/absen";
 const Home = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [nik, setNIK] = useState("Belum Ter-Scan");
+  const [nik, setNIK] = useState(null);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -15,15 +17,30 @@ const Home = () => {
       setHasPermission(status === "granted");
     })();
   };
-
+  const setAbsen = () => {
+    console.log("telah di scan");
+  };
   // Requst Izin Kamera
   useEffect(() => {
     askForCameraPermission();
-  }, []);
+    !nik === null && setAbsen();
+  }, [nik]);
   // Scan NIK doing
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setNIK(data);
+    // async () => {
+    //   try {
+    //     const res = await axios.get(baseUrl, {
+    //       headers: {
+    //         nik: nik,
+    //       },
+    //     });
+    //     alert("Scan Berhasil");
+    //   } catch (error) {
+    //     alert(error);
+    //   }
+    // };
     console.log("Type: " + type + "\nData: " + data);
   };
   //Check izin
@@ -51,12 +68,13 @@ const Home = () => {
       <Text style={styles.barusajatext}>Baru saja diabsen :</Text>
       <Lastdata />
       {scanned && (
-        <Button
-          title={"Scan lagi?"}
-          color={"#22A6B3"}
-          onPress={() => setScanned(false)}
-        />
-      )}
+          <Button
+            title={"Scan lagi?"}
+            color={"#22A6B3"}
+            onPress={() => setScanned(false)}
+          />
+        ) &&
+        setNIK("silahkan scan ulang")}
       <Navigation />
     </View>
   );

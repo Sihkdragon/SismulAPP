@@ -10,11 +10,11 @@ const title = "Studen Data";
 const MainStack = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Splash"
         component={Splash}
         options={{ headerShown: false }}
-      /> */}
+      />
       <Stack.Screen
         name="Login"
         component={Login}

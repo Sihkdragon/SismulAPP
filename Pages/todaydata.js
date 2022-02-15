@@ -12,7 +12,7 @@ import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
-const baseUrl = "http://192.168.18.18:8000/todaydata";
+const baseUrl = "http://192.168.41.39:8000/todaydata";
 
 const Item = ({ siswa_id, nama }) => (
   <View style={styles.tableContentContainer}>
