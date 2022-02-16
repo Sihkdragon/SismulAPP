@@ -12,7 +12,8 @@ import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
-const baseUrl = "http://192.168.41.39:8000/todaydata";
+import BASEURL from "../assets/baseurl";
+const URL = BASEURL + "todaydata";
 
 const Item = ({ siswa_id, nama }) => (
   <View style={styles.tableContentContainer}>
@@ -29,7 +30,7 @@ const TodayData = () => {
   const [DATA, SETDATA] = useState([]);
   const getData = async () => {
     try {
-      const res = await axios.get(baseUrl);
+      const res = await axios.get(URL);
       SETDATA(res.data);
     } catch (error) {
       alert(error);
@@ -72,7 +73,7 @@ const TodayData = () => {
           <FlatList
             data={DATA}
             renderItem={renderItem}
-            keyExtractor={(item) => item.siswa_id}
+            keyExtractor={(item) => item.id}
           />
         </SafeAreaView>
       </View>

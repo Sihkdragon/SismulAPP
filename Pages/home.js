@@ -5,7 +5,9 @@ import { Header } from "./Components/header";
 import Lastdata from "./Components/lastdata";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-const URL = "http://192.168.41.39:8000/api/absenpost";
+import BASEURL from "../assets/baseurl";
+const URL = BASEURL + "/api/absenpost";
+// const URL = "http://192.168.18.18:8000/api/absenpost";
 const Home = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -14,7 +16,7 @@ const Home = () => {
   // GetData Terakhir Absen
   const getData = async () => {
     try {
-      const res = await axios.get("http://192.168.41.39:8000/homedata");
+      const res = await axios.get(BASEURL + "homedata");
       SETDATA(res.data);
     } catch (error) {
       alert(error);
@@ -78,17 +80,13 @@ const Home = () => {
       </View>
       <Text style={styles.barusajatext}>Baru saja diabsen :</Text>
       <Lastdata DATA={DATA} />
-      {
-        scanned && (
-          <Button
-            title={"Scan lagi?"}
-            color={"#22A6B3"}
-            onPress={() => setScanned(false)}
-          />
-        )
-        // &&
-        // setNIK("silahkan scan ulang")
-      }
+      {scanned && (
+        <Button
+          title={"Scan lagi?"}
+          color={"#22A6B3"}
+          onPress={() => setScanned(false)}
+        />
+      )}
       <Navigation />
     </View>
   );

@@ -12,7 +12,8 @@ import Navigation from "./Components/navigation";
 import { Header } from "./Components/header";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
-const baseUrl = "http://192.168.41.39:8000/alldata";
+import BASEURL from "../assets/baseurl";
+const URL = BASEURL + "alldata";
 
 const Item = ({ nik, nama, latestabsen }) => (
   <View style={styles.tableContentContainer}>
@@ -31,7 +32,7 @@ const Alldata = () => {
   const [DATA, SETDATA] = useState([]);
   const getData = async () => {
     try {
-      const res = await axios.get(baseUrl);
+      const res = await axios.get(URL);
       SETDATA(res.data);
     } catch (error) {
       alert(error);
