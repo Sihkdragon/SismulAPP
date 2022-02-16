@@ -6,7 +6,29 @@ import Lastdata from "./Components/lastdata";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import BASEURL from "../assets/baseurl";
-const URL = BASEURL + "/api/absenpost";
+
+const getCurrentDay = () => {
+  const dayName = [
+    "Minggu",
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu",
+  ];
+  const date = new Date();
+  return dayName[date.getDay()];
+};
+const getCurrentDate = () => {
+  const date = new Date().getDate();
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+
+  return date + "/" + month + "/" + year; //format: dd-mm-yyyy;
+};
+
+const URL = BASEURL + "api/absenpost";
 // const URL = "http://192.168.18.18:8000/api/absenpost";
 const Home = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -41,6 +63,7 @@ const Home = () => {
       });
       // setStatus("Berhasil Dikirim");
       alert("Siswa dengan NIS " + NIK + " Berhasil diabsen");
+      getData();
     } catch (error) {
       console.log(error);
     }
@@ -69,8 +92,8 @@ const Home = () => {
     <View style={styles.homecontainer}>
       <Header title={"Home"} />
       <View style={styles.time}>
-        <Text style={styles.timetext}>Rabu</Text>
-        <Text style={styles.timetext}>02/02/2022</Text>
+        <Text style={styles.timetext}>{getCurrentDay()}</Text>
+        <Text style={styles.timetext}>{getCurrentDate()}</Text>
       </View>
       <View style={styles.camera}>
         <BarCodeScanner

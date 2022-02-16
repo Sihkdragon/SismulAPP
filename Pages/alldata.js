@@ -65,7 +65,7 @@ const Alldata = () => {
       <View style={styles.tableContainer}>
         <View style={styles.tableHeaderContainer}>
           <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderName}>NISN</Text>
+            <Text style={styles.tableHeaderName}>NIS</Text>
           </View>
           <View style={styles.tableHeader2}>
             <Text style={styles.tableHeaderName}>Nama</Text>

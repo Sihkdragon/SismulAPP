@@ -23,7 +23,9 @@ const Login = () => {
         onChangeText={setUsername}
         value={username}
       />
-      <Text style={styles.inputText}>Password</Text>
+      <Text style={styles.inputText} secureTextEntry={true}>
+        Password
+      </Text>
       <TextInput
         style={styles.input}
         onChangeText={setPassword}
