@@ -40,6 +40,7 @@ const Home = () => {
     try {
       const res = await axios.get(BASEURL + "homedata");
       SETDATA(res.data);
+      console.log(res);
     } catch (error) {
       alert(error);
     }
